@@ -3,7 +3,6 @@ package com.example.kafka.consumer;
 import com.example.kafka.ClientConsumer;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
-import org.springframework.util.CollectionUtils;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -113,7 +112,7 @@ public class ConsumerSample {
                 // 按 partition 处理
                 for (TopicPartition topicPartition : consumerRecords.partitions()) {
                     List<ConsumerRecord<String, String>> records = consumerRecords.records(topicPartition);
-                    if (!CollectionUtils.isEmpty(records)) {
+                    if (!records.isEmpty()) {
                         records.forEach(System.out::println);
 
                         // 按 partition 提交

@@ -1,8 +1,9 @@
 package com.example.kafka.producer;
 
 import com.example.kafka.ClientConsumer;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 import java.util.concurrent.Future;
@@ -14,8 +15,9 @@ import static com.example.kafka.Constant.TOPIC_NAME;
  *
  * @author xianglin
  */
-@Slf4j
 public class ProducerSample {
+    private static final Logger log = LoggerFactory.getLogger(ProducerSample.class);
+
     public static void main(String[] args) {
         asyncSend();
     }
