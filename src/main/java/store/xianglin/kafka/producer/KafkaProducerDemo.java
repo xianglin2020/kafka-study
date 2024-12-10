@@ -4,9 +4,10 @@ import org.apache.kafka.clients.producer.*;
 
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class KafkaProducerDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         var property = System.getProperty("bootstrap.servers", "localhost:9092");
         var props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, property);
@@ -41,6 +42,11 @@ public class KafkaProducerDemo {
 
             // 异步发送
             producer.send(record, new DemoProducerCallback());
+
+            for (var i = 0; ; i++) {
+                producer.send(new ProducerRecord<>("CustomerCountry", "Precision Products" + i, "France" + i));
+                TimeUnit.SECONDS.sleep(1);
+            }
         }
     }
 
